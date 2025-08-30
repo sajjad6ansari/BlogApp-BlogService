@@ -1,0 +1,11 @@
+import express from "express";
+import { getUserProfile, loginUser, myProfile, updateProfilePicture, UpdateUserProfile } from "../controllers/user.js";
+import { isAuth } from "../middlewares/isAuth.js";
+import uploadFile from "../middlewares/multer.js";
+const router = express.Router();
+router.post("/login", loginUser);
+router.get("/me", isAuth, myProfile);
+router.get("/user/:userId", isAuth, getUserProfile);
+router.patch("/user/update", isAuth, UpdateUserProfile);
+router.patch("/user/update/pic", isAuth, uploadFile, updateProfilePicture);
+export default router;
