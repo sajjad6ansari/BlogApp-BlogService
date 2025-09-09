@@ -2,9 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import blogRoutes from "./routes/blog.js";
 import { createClient } from "redis" 
+import { startCacheConsumer } from "./utils/consumer.js";
+import cors from "cors";
 dotenv.config();
 
 const app = express();
+
+startCacheConsumer();
+
 
 export const redisClient = createClient({
   url: process.env.REDIS_URL
@@ -16,6 +21,7 @@ redisClient.connect().then(() => {
   console.error("Error connecting to Redis:", error);
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

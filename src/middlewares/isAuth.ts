@@ -1,7 +1,22 @@
 import { NextFunction } from "express";
 import { Request, Response } from "express"
 import jwt, { JwtPayload } from "jsonwebtoken"
-import { IUser } from "../model/User.js";
+// import { IUser } from "../model/User.js";
+
+// export interface AuthenticatedRequest extends Request {
+//   user?: IUser | null;
+// }
+
+interface IUser extends Document {
+  _id: string;
+  name: string;
+  email: string;
+  image: string;
+  instagram: string;
+  facebook: string;
+  linkedin: string;
+  bio: string;
+}
 
 export interface AuthenticatedRequest extends Request {
   user?: IUser | null;
